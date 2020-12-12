@@ -1,0 +1,2 @@
+# UnrealLogParser
+UnrealEngineが出力するログをPythonでパースする
