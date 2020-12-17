@@ -19,6 +19,10 @@ class Verbosity(Enum):
 class Log:
     """パースしたログ情報
 
+    verbosityとcategoryはNoneの場合があります。
+    コンソールコマンド変更後やログファイルを閉じた時間等の一部のシステム的なログには
+    verbosityとcategoryが含まれていません。
+
     Attributes:
         date (datetime): ログが出力された時刻
         verbosity (Verbosity): ログのVerbosityLevel
@@ -27,8 +31,8 @@ class Log:
         log_body (str): 時刻情報、VerbosityLevel,カテゴリを取り除いたログ本文
     """
     date: datetime
-    verbosity: Verbosity
-    category: str
+    verbosity: Optional[Verbosity]
+    category: Optional[str]
     log: str
     log_body: str
 
@@ -198,18 +202,18 @@ class Parser:
         log_without_time = match.group(8)
         category_match = Parser._split_log_category.match(log_without_time)
         if category_match is None:
-            return None
-
-        category = category_match.group(1)
-        log_without_category = category_match.group(2)
-
-        # Verbosity検出
-        verbosity_math = Parser._split_log_verbosity.match(log_without_category)
-        if verbosity_math is not None:
-            verbosity = Verbosity[verbosity_math.group(1)]
-            log_body = verbosity_math.group(2)
+            return Log(time, None, None, log_without_time, log_without_time)
         else:
-            verbosity = Verbosity.Log
-            log_body = log_without_category
+            category = category_match.group(1)
+            log_without_category = category_match.group(2)
 
-        return Log(time, verbosity, category, log_without_time, log_body)
+            # Verbosity検出
+            verbosity_math = Parser._split_log_verbosity.match(log_without_category)
+            if verbosity_math is not None:
+                verbosity = Verbosity[verbosity_math.group(1)]
+                log_body = verbosity_math.group(2)
+            else:
+                verbosity = Verbosity.Log
+                log_body = log_without_category
+
+            return Log(time, verbosity, category, log_without_time, log_body)
