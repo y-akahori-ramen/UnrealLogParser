@@ -1,3 +1,5 @@
+![Python package](https://github.com/y-akahori-ramen/UnrealLogParser/workflows/Python%20package/badge.svg)
+
 # UnrealLogParser
 UnrealEngineが出力するログをPythonでパースする
 
