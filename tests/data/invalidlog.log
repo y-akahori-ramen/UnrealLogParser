@@ -1,0 +1,8 @@
+﻿LogD3D11RHI: Loaded GFSDK_Aftermath_Lib.x64.dll
+[2020.12.14-13.46.03:809][850]LogTemp: MultilineTest line1
+MultilineTest line2
+[2020.12.14-13.46.04:819][850]SampleCategory: Warning: WarningVerbosityTest
+[2020.12.14-13.46.05:829][850]LogTemp: Error: ErrorVerbosityTest
+[2020.12.14-13.46.06:839][404]LogTemp: Display: DisplayVerbosityTest
+[2020.12.14-13.46.07:849][404]LogTemp: LogVerbosityTest
+[2020.12.14-13.46.08:859][404]NoneCategory,VerbosityTest
