@@ -13,8 +13,8 @@ pip install git+https://github.com/y-akahori-ramen/UnrealLogParser
 import uelogparser
 
 
-with open('ue4.log', encoding='utf_8_sig') as log:
-    parser = uelogparser.Parser(log)
+with open('ue4.log', encoding='utf_8_sig') as log_file:
+    parser = uelogparser.Parser(log_file)
     log = parser.read()
 
     while log:
